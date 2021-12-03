@@ -4,8 +4,18 @@ using StatsBase
 
 binaries = split.(readlines("data/day3.txt"), "")
 
-most_common(x) = map(i -> mode(map(x_i -> x_i[i], x)), 1:length(x[1])) 
-least_common(x) = map(x_i -> x_i == "0" ? "1" : "0", most_common(x))
+function mode(x)
+    dict = countmap(x)
+    return collect(keys(dict))[findall(collect(values(dict)) .== maximum(collect(values(dict))))]
+end 
+
+function antimode(x)
+    dict = countmap(x)
+    return collect(keys(dict))[findall(collect(values(dict)) .== minimum(collect(values(dict))))]
+end
+
+most_common(x) = map(i -> mode(map(x_i -> x_i[i], x))[1], 1:length(x[1])) 
+least_common(x) = map(i -> antimode(map(x_i -> x_i[i], x))[1], 1:length(x[1])) 
 
 gamma = parse(Int, string(most_common(binaries)...), base = 2)
 epsilon = parse(Int, string(least_common(binaries)...), base = 2)
@@ -15,8 +25,8 @@ function filter_step(b, i)
     if (length(b) == 1) 
         return b 
     else 
-        mc = modes(map(x -> x[i], b))
-        mc = length(mc) > 1 ? "1" : mc[1,1]
+        mc = mode(map(x -> x[i], b))
+        mc = length(mc) > 1 ? "1" : mc[1]
         return filter(x -> x[i] == mc, b)
     end
 end
@@ -30,8 +40,8 @@ function filter_step_negative(b, i)
     if (length(b) == 1) 
         return b
     else 
-        mc = modes(map(x -> x[i], b))
-        mc = length(mc) > 1 ? "0" : ( mc[1,1] == "1" ? "0" : "1" )
+        mc = antimode(map(x -> x[i], b))
+        mc = length(mc) > 1 ? "0" : mc[1]
         return filter(x -> x[i] == mc, b)
     end
 end 
