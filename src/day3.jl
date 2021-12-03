@@ -5,17 +5,25 @@ using StatsBase
 binaries = split.(readlines("data/day3.txt"), "")
 
 function mode(x)
-    dict = countmap(x)
-    return collect(keys(dict))[findall(collect(values(dict)) .== maximum(collect(values(dict))))]
+    d = countmap(x)
+    v = collect(values(d))
+    k = collect(keys(d))
+    return k[findall(v .== maximum(v))]
 end 
 
 function antimode(x)
-    dict = countmap(x)
-    return collect(keys(dict))[findall(collect(values(dict)) .== minimum(collect(values(dict))))]
+    d = countmap(x)
+    v = collect(values(d))
+    k = collect(keys(d))
+    return k[findall(v .== minimum(v))]
 end
 
-most_common(x) = map(i -> mode(map(x_i -> x_i[i], x))[1], 1:length(x[1])) 
-least_common(x) = map(i -> antimode(map(x_i -> x_i[i], x))[1], 1:length(x[1])) 
+most_common(x) = map(1:length(x[1])) do i 
+    return mode(map(x_i -> x_i[i], x))[1]
+end
+least_common(x) = map(1:length(x[1])) do i 
+    return antimode(map(x_i -> x_i[i], x))[1]
+end
 
 gamma = parse(Int, string(most_common(binaries)...), base = 2)
 epsilon = parse(Int, string(least_common(binaries)...), base = 2)
@@ -31,8 +39,10 @@ function filter_step(b, i)
     end
 end
 
+binlen = length(binaries[1])
+
 oxygen_generator = 
-    reduce(filter_step, 1:length(binaries[1]); init = binaries)[1] |>
+    reduce(filter_step, 1:binlen; init = binaries)[1] |>
     surviving -> string(surviving...) |>
     surviving -> parse(Int, surviving; base = 2)
 
@@ -47,7 +57,7 @@ function filter_step_negative(b, i)
 end 
 
 co2_scrubber = 
-    reduce(filter_step_negative, 1:length(binaries[1]); init = binaries)[1] |>
+    reduce(filter_step_negative, 1:binlen; init = binaries)[1] |>
     surviving -> string(surviving...) |>
     surviving -> parse(Int, surviving; base = 2)
 
