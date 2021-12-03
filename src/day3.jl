@@ -25,8 +25,10 @@ least_common(x) = map(1:length(x[1])) do i
     return antimode(map(x_i -> x_i[i], x))[1]
 end
 
-gamma = parse(Int, string(most_common(binaries)...), base = 2)
-epsilon = parse(Int, string(least_common(binaries)...), base = 2)
+array_to_decimal(x) = parse(Int, string(x...), base = 2)
+
+gamma = array_to_decimal(most_common(binaries))
+epsilon = array_to_decimal(least_common(binaries))
 power_consumption = gamma * epsilon
 
 function filter_step(b, i)
@@ -43,8 +45,7 @@ binlen = length(binaries[1])
 
 oxygen_generator = 
     reduce(filter_step, 1:binlen; init = binaries)[1] |>
-    surviving -> string(surviving...) |>
-    surviving -> parse(Int, surviving; base = 2)
+    array_to_decimal
 
 function filter_step_negative(b, i) 
     if (length(b) == 1) 
@@ -58,8 +59,7 @@ end
 
 co2_scrubber = 
     reduce(filter_step_negative, 1:binlen; init = binaries)[1] |>
-    surviving -> string(surviving...) |>
-    surviving -> parse(Int, surviving; base = 2)
+    array_to_decimal
 
 life_support = co2_scrubber * oxygen_generator
 
