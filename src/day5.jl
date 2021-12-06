@@ -1,16 +1,22 @@
 module Day5
 
-lines = map(readlines("data/day5.txt")) do line 
-    p1, p2 = split(line, " -> ")
-    x1, y1 = parse.(Int, split(p1, ","))
-    x2, y2 = parse.(Int, split(p2, ",")) 
-    return ((x1, y1), (x2, y2))
+export part1, part2
+
+function input()
+    map(readlines("data/day5.txt")) do line 
+        p1, p2 = split(line, " -> ")
+        x1, y1 = parse.(Int, split(p1, ","))
+        x2, y2 = parse.(Int, split(p2, ",")) 
+        return ((x1, y1), (x2, y2))
+    end
 end
 
-hvlines = filter(lines) do line
-    x1, y1 = line[1]
-    x2, y2 = line[2]
-    return (x1 == x2) | (y1 == y2)
+function hvlines()
+    hvlines = filter(input()) do line
+        x1, y1 = line[1]
+        x2, y2 = line[2]
+        return (x1 == x2) | (y1 == y2)
+    end
 end
 
 function points(line)
@@ -41,7 +47,12 @@ function count_overlaps(lines)
 
 end
 
-part1_ans = count_overlaps(hvlines)
-part2_ans = count_overlaps(lines)
+function part1()
+    count_overlaps(hvlines())
+end
+
+function part2() 
+    count_overlaps(input())
+end
 
 end

@@ -1,7 +1,17 @@
 module Day4 
 
+export part1, part2
+
 # Read Input
-input = readlines("data/day4.txt")
+function input() 
+    input = readlines("data/day4.txt")
+    cards = map(3:6:length(input)) do i 
+        card = split.(input[i:(i + 4)], " "; keepempty = false)
+        BingoCard([BingoRow(parse.(Int, row)) for row in card])
+    end 
+    picked = parse.(Int, split(input[1], ","))
+    return cards, picked
+end
 
 # Bingo Card Types
 abstract type BingoVector end
@@ -46,21 +56,20 @@ end
 
 score(card::BingoCard, picked) = sum(setdiff(elms(card), picked)) * picked[length(picked)]
 
-# Parse Inputs
-cards = map(3:6:length(input)) do i 
-    card = split.(input[i:(i + 4)], " "; keepempty = false)
-    BingoCard([BingoRow(parse.(Int, row)) for row in card])
-end 
-picked = parse.(Int, split(input[1], ","))
-
 # Part 1: Pick first winner and compute score
-(winner, winner_picked) = find_first_winners(cards, picked)
-@assert length(winner) == 1
-score(winner[1], winner_picked)
+function part1() 
+    cards, picked = input()
+    (winner, winner_picked) = find_first_winners(cards, picked)
+    @assert length(winner) == 1
+    score(winner[1], winner_picked)
+end
 
 # Part 2: Pick last winner and compute score 
-(loser, loser_picked) = find_last_winners(cards, picked)
-@assert length(loser) == 1
-score(loser[1], loser_picked)
+function part2() 
+    cards, picked = input()
+    (loser, loser_picked) = find_last_winners(cards, picked)
+    @assert length(loser) == 1
+    score(loser[1], loser_picked)
+end
 
 end

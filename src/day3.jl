@@ -2,7 +2,11 @@ module Day3
 
 using StatsBase
 
-binaries = split.(readlines("data/day3.txt"), "")
+export part1, part2
+
+function input() 
+    split.(readlines("data/day3.txt"), "")
+end
 
 function mode(x)
     d = countmap(x)
@@ -27,10 +31,6 @@ end
 
 array_to_decimal(x) = parse(Int, string(x...), base = 2)
 
-gamma = array_to_decimal(most_common(binaries))
-epsilon = array_to_decimal(least_common(binaries))
-power_consumption = gamma * epsilon
-
 function filter_step(b, i)
     if (length(b) == 1) 
         return b 
@@ -40,12 +40,6 @@ function filter_step(b, i)
         return filter(x -> x[i] == mc, b)
     end
 end
-
-binlen = length(binaries[1])
-
-oxygen_generator = 
-    reduce(filter_step, 1:binlen; init = binaries)[1] |>
-    array_to_decimal
 
 function filter_step_negative(b, i) 
     if (length(b) == 1) 
@@ -57,10 +51,23 @@ function filter_step_negative(b, i)
     end
 end 
 
-co2_scrubber = 
-    reduce(filter_step_negative, 1:binlen; init = binaries)[1] |>
-    array_to_decimal
+function part1()
+    binaries = input()
+    gamma = array_to_decimal(most_common(binaries))
+    epsilon = array_to_decimal(least_common(binaries))
+    return gamma * epsilon
+end
 
-life_support = co2_scrubber * oxygen_generator
+function part2()
+    binaries = input()
+    binlen = length(binaries[1])
+    oxygen_generator = 
+        reduce(filter_step, 1:binlen; init = binaries)[1] |>
+        array_to_decimal        
+    co2_scrubber = 
+        reduce(filter_step_negative, 1:binlen; init = binaries)[1] |>
+        array_to_decimal
+    return co2_scrubber * oxygen_generator
+end
 
 end

@@ -1,41 +1,50 @@
 module Day2
 
-directions = split.(readlines("data/day2.txt"), " ")
+export part1, part2
 
-position = 0
-depth = 0
-
-for direction in directions 
-    if direction[1] == "up"
-        depth -= parse(Int, direction[2])
-    elseif direction[1] == "down"
-        depth += parse(Int, direction[2])
-    elseif direction[1] == "forward"
-        position += parse(Int, direction[2])
-    else
-        error("Invalid direction")
-    end
+function directions() 
+    split.(readlines("data/day2.txt"), " ")
 end
 
-part1_ans = position * depth
+function part1()
+    position = 0
+    depth = 0
 
-aim = 0
-position = 0
-depth = 0
-
-for direction in directions 
-    if direction[1] == "up"
-        aim -= parse(Int, direction[2])
-    elseif direction[1] == "down"
-        aim += parse(Int, direction[2])
-    elseif direction[1] == "forward"
-        position += parse(Int, direction[2])
-        depth += parse(Int, direction[2]) * aim
-    else
-        error("Invalid direction")
+    for direction in directions()
+        if direction[1] == "up"
+            depth -= parse(Int, direction[2])
+        elseif direction[1] == "down"
+            depth += parse(Int, direction[2])
+        elseif direction[1] == "forward"
+            position += parse(Int, direction[2])
+        else
+            error("Invalid direction")
+        end
     end
+
+    return position * depth
+
 end
 
-part2_ans = position * depth
+function part2() 
+    aim = 0
+    position = 0
+    depth = 0
+
+    for direction in directions()
+        if direction[1] == "up"
+            aim -= parse(Int, direction[2])
+        elseif direction[1] == "down"
+            aim += parse(Int, direction[2])
+        elseif direction[1] == "forward"
+            position += parse(Int, direction[2])
+            depth += parse(Int, direction[2]) * aim
+        else
+            error("Invalid direction")
+        end
+    end
+
+    return position * depth
+end
 
 end

@@ -1,9 +1,13 @@
-module Day5
+module Day6
 
 using StatsBase
 
-input = parse.(Int, split(readline("data/day6.txt"), ",")) |>
-    StatsBase.countmap
+export part1, part2
+
+function input() 
+    parse.(Int, split(readline("data/day6.txt"), ",")) |>
+        StatsBase.countmap
+end
 
 function move_one_day(timers) 
 
@@ -34,7 +38,7 @@ function total_fish(timers)
     sum(values(timers))
 end
 
-part1_ans = total_fish(move_n_days(timers, 80))
-part2_ans = total_fish(move_n_days(timers, 256))
+part1() = total_fish(move_n_days(input(), 80))
+part2() = total_fish(move_n_days(input(), 256))
 
 end
