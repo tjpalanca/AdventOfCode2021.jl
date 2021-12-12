@@ -3,7 +3,7 @@ image: ghcr.io/tjpalanca/tjcloud/gitpod
 tasks:
   - name: Setup Julia Environment 
     init: |
-      julia -e '
+      julia -e --project=/workspace/AdventOfCode.jl '
         import Pkg
         Pkg.activate(".")
         Pkg.instantiate(; verbose = true)
