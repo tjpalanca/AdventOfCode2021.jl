@@ -1,16 +1,13 @@
 image: ghcr.io/tjpalanca/tjcloud/gitpod
 
 tasks:
-  - name: Add Revise.jl
-    init: |
-      julia -e 'using Pkg; Pkg.add("Revise");' &&
-        mkdir -p ~/.julia/config/ && 
-        echo "using Revise" >> ~/.julia/config/startup.jl
   - name: Setup Julia Environment 
     init: |
-      julia -e '
-        using Pkg
-        Pkg.activate(".")
+      julia -e 'using Pkg; Pkg.add("Revise"); Pkg.precompile()' &&
+        mkdir -p ~/.julia/config/ && 
+        echo "using Revise" >> ~/.julia/config/startup.jl
+      julia -e ';using Pkg
+        Pkg.activate("/workspace/AdventOfCode.jl")
         Pkg.instantiate(; verbose = true);
       '
 
