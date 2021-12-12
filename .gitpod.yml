@@ -6,7 +6,7 @@ tasks:
       julia -e '
         import Pkg
         Pkg.activate(".")
-        Pkg.instantiate()
+        Pkg.instantiate(; verbose = true)
       '
 
 vscode:
