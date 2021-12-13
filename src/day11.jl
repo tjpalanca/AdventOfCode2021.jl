@@ -7,10 +7,10 @@ init() = collect(transpose(parse.(Int, reduce(hcat, split.(readlines("data/day11
 is_valid(p) = (p[1] > 0) & (p[1] <= 10) & (p[2] > 0) & (p[2] <= 10)
 
 adjacents(p) = filter(is_valid, [
-p .+ CartesianIndices((1:1, -1:1))...,
-p .- CartesianIndices((1:1, -1:1))...,
-p + CartesianIndex(0, 1),
-p - CartesianIndex(0, 1)
+    p .+ CartesianIndices((1:1, -1:1))...,
+    p .- CartesianIndices((1:1, -1:1))...,
+    p + CartesianIndex(0, 1),
+    p - CartesianIndex(0, 1)
 ])
 
 function advance_step(state) 
@@ -49,7 +49,7 @@ function part2()
             all_flash_step = step
         end
     end
-    all_flash_step
+    return all_flash_step
 end
 
 end
