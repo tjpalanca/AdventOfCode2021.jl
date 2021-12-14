@@ -17,12 +17,14 @@ function fold_up(dots, y)
     flipped_lower_side = [CartesianIndex(dot[1], y - (dot[2] - y)) for dot in lower_side]
     return unique(vcat(upper_side, flipped_lower_side))
 end
+
 function fold_left(dots, x)
     left_side  = filter(d -> d[1] < x, dots)
     right_side = filter(d -> d[1] > x, dots) 
     flipped_right_side = [CartesianIndex(x - (dot[1] - x), dot[2]) for dot in right_side]
     return unique(vcat(left_side, flipped_right_side))  
 end
+
 function fold(dots, fold)
     if fold[1] == "fold along x"
         fold_left(dots, fold[2])
