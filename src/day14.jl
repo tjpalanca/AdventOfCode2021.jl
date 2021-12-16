@@ -1,5 +1,7 @@
 module Day14
 
+export part1, part2
+
 using StatsBase: countmap
 
 const input = readlines("data/day14.txt")
