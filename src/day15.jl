@@ -13,6 +13,8 @@ adjacent(p, dims) = filter(
 
 function safest_path(risk_map, start_pt, end_pt)
 
+    # This is a basic implementation of Dijkstra's algorithm from 
+    # https://brilliant.org/wiki/dijkstras-short-path-finder/
     map_size = size(risk_map)
     map_elem = map_size[1] * map_size[2]
     distances = fill(Inf, map_size) 
@@ -58,6 +60,8 @@ end
 function part2() 
     rm = expand_map(risk_map())
     s, e = start_pt(), end_pt(rm)
+    # TODO: This is super slow, apparently you can make this faster
+    # by adding a priority queue to Dijkstra's Algorithm
     safest_path(rm, s, e)
 end
 
