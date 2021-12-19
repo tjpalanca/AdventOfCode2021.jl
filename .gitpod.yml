@@ -2,7 +2,7 @@ image: ghcr.io/tjpalanca/tjcloud/gitpod:latest
 
 tasks:
   - name: Setup Julia Environment 
-    init: pwd && whoami
+    init: cat Manifest.toml
 
 vscode:
   extensions:
