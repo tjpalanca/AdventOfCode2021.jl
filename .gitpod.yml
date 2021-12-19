@@ -4,6 +4,7 @@ tasks:
   - name: Setup Julia Environment 
     init: julia --project --color=yes -e "println(Base.DEPOT_PATH)"
 
+
 vscode:
   extensions:
     - julialang.language-julia
