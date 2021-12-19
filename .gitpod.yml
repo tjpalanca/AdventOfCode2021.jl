@@ -2,12 +2,7 @@ image: ghcr.io/tjpalanca/tjcloud/gitpod:latest
 
 tasks:
   - name: Setup Julia Environment 
-    init: |
-      julia -e ';
-        using Pkg
-        Pkg.activate("/workspace/AdventOfCode.jl")
-        Pkg.instantiate(; verbose = true);
-      '
+    init: pwd && julia --project --color=yes --check-bounds=yes -e 'using Pkg; Pkg.instantiate();'
 
 vscode:
   extensions:
