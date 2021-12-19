@@ -2,7 +2,7 @@ image: ghcr.io/tjpalanca/tjcloud/gitpod:latest
 
 tasks:
   - name: Setup Julia Environment 
-    init: cat Manifest.toml
+    init: julia --project --color=yes -e "import Pkg; Pkg.activate(); Pkg.instantiate();"
 
 vscode:
   extensions:
