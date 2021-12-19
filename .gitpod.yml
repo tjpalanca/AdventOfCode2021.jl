@@ -1,4 +1,4 @@
-image: ghcr.io/tjpalanca/tjcloud/gitpod
+image: ghcr.io/tjpalanca/tjcloud/gitpod:latest
 
 tasks:
   - name: Setup Julia Environment 
