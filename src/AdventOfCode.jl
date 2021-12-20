@@ -1,6 +1,6 @@
 module AdventOfCode
 
-export Day1, Day2, Day3, Day4, Day5, Day6
+export all
 
 include("day1.jl")
 using .Day1
@@ -34,5 +34,7 @@ include("day15.jl")
 using .Day15
 include("day16.jl")
 using .Day16
+include("day17.jl")
+using .Day17
 
 end
