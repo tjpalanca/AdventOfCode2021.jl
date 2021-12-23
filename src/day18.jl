@@ -8,7 +8,6 @@ mutable struct SnailfishNumber
     l::Union{SnailfishNumber, Int}
     r::Union{SnailfishNumber, Int}
 end
-sfn(args...) = SnailfishNumber(args...)
 
 function Base.parse(::Type{SnailfishNumber}, str::AbstractString) 
     eval(Meta.parse(replace(str, "[" => "SnailfishNumber(", "]" => ")")))
