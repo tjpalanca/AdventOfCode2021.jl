@@ -40,5 +40,7 @@ include("day18.jl")
 using .Day18
 include("day19.jl")
 using .Day19
+include("day20.jl")
+using .Day20
 
 end

@@ -1,7 +1,13 @@
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
+
+[[deps.Adapt]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "84918055d15b3114ede17ac6a7182f68870c16f7"
+uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
+version = "3.3.1"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
@@ -201,6 +207,12 @@ uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
 
+[[deps.OffsetArrays]]
+deps = ["Adapt"]
+git-tree-sha1 = "043017e0bdeff61cfbb7afeb558ab29536bbb5ed"
+uuid = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
+version = "1.10.8"
+
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
@@ -209,6 +221,12 @@ uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.4.1"
+
+[[deps.PaddedViews]]
+deps = ["OffsetArrays"]
+git-tree-sha1 = "646eed6f6a5d8df6708f15ea7e02a7a2c4fe4800"
+uuid = "5432bcbf-9aad-5242-b902-cca2824c8663"
+version = "0.5.10"
 
 [[deps.Parsers]]
 deps = ["Dates"]
