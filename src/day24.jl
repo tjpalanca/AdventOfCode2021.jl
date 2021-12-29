@@ -77,14 +77,14 @@ end
 
 function part1()
     states = calculate_states("max", 10000000)
-    number = string(a[0]...)
+    number = string(states[0]...)
     @assert monad_program()(number) == true
     return number
 end
 
 function part2()
     states = calculate_states("min", 10000000)
-    number = string(a[0]...)
+    number = string(states[0]...)
     @assert monad_program()(number) == true
     return number
 end
