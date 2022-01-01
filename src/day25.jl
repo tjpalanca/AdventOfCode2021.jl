@@ -1,5 +1,7 @@
 module Day25
 
+export part1, part2
+
 parse_seafloor(txt) = permutedims(reduce(hcat, [[c for c in i] for i in txt])) 
 occupied(mat) = findall(c -> c != '.', mat)
 
@@ -40,7 +42,8 @@ function part1()
     return seafloor, convergence 
 end
 
-function part2() 
+function part2()
+    println("No part 2 in this day") 
 end
 
 end
